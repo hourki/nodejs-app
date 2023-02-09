@@ -6,7 +6,10 @@
 version: 2
 updates:
   - package-ecosystem: "npm" # See documentation for possible values
-    directory: "/backend/" # Location of package manifests
+    directory: "/frontend/" # Location of package manifests
     schedule:
-      interval: "daily"
+      interval: "weekly"
+      day: "thursday"
+      time: "23:55"
+      timzone: "Africa/tunis"
     open-pull-requests-limit: 5
