@@ -12,4 +12,6 @@ updates:
       day: "thursday"
       time: "23:55"
       timezone: "Africa/Tunis"
-    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "[DEPANDABOT] "
+    open-pull-requests-limit: 10
