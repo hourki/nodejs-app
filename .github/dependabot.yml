@@ -11,5 +11,5 @@ updates:
       interval: "weekly"
       day: "thursday"
       time: "23:55"
-      timzone: "Africa/tunis"
+      timezone: "Africa/tunis"
     open-pull-requests-limit: 5
