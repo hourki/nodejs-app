@@ -1,8 +1,9 @@
 name: Dependabot Auto-PR Workflow
 
 on:
-  schedule:
-    - cron: '50 23 * * *'
+  push:
+    branches:
+      - master
 
 jobs:
   create_auto_pr:
