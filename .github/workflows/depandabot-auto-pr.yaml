@@ -9,45 +9,10 @@ jobs:
   create_auto_pr:
     runs-on: ubuntu-latest
     steps:
-      - name: Get Dependabot alerts
-        uses: mheap/github-action-get-dependabot-alerts@v1.0.0
+      - uses: actions/checkout@v2
+      - name: Check for Dependabot alerts
+        uses: dependabot/dependabot-script@main
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Create Auto Depandabot PR
-        id: create_pr
-        uses: dependabot/create-merge-request-action@v2.5.0
-        with:
-          dependabot-github-token: ${{ secrets.DEPENDABOT_GITHUB_TOKEN }}
-          allow-modifications: true
-        env:
-          ALERT_SEVERITY: critical
-          PR_TITLE_PREFIX: '[Dependabot] '
-          PR_BRANCH_PREFIX: 'dependabot/'
-          PR_BRANCH_SUFFIX: '-update'
+          dependencies: all
+          directory: '/frontend'
 
-      - name: Label pull requests
-        uses: rachmari/labeler@v2.2.0
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          labels: 'dependabot'
-
-      - name: Comment on pull requests
-        uses: actions/github-script@v4
-        if: steps.create_pr.outputs.created != 'false'
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const prs = JSON.parse('${{ steps.create_pr.outputs.created }}');
-            for (const pr of prs) {
-              const issue = await github.issues.get({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: pr.number,
-              });
-              await github.issues.createComment({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: pr.number,
-                body: `This pull request was created automatically by Dependabot.`
-              });
-            }
