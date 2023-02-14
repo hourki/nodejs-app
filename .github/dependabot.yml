@@ -14,4 +14,4 @@ updates:
       timezone: "Africa/Tunis"
     commit-message:
       prefix: "[DEPANDABOT] "
-    open-pull-requests-limit: 10
+    open-pull-requests-limit: 1
