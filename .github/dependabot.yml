@@ -10,5 +10,4 @@ updates:
     labels:
       - 'dependencies'
       - 'critical updates'
-    severity: 'critical'
-    open-pull-requests-limit: 3
+    open-pull-requests-limit: 1
