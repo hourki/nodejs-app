@@ -2,7 +2,7 @@ name: Dependabot Auto-PR Workflow
 
 on:
   schedule:
-    - cron: '23 30 * * *' # Runs everyday at 11:20pm
+    - cron: '33 23 * * *' # Runs everyday at 11:20pm
   repository_dispatch:
     types: [dependabot_alert_created]
 
