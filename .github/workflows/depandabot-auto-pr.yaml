@@ -1,14 +1,12 @@
 name: Dependabot Auto-PR Workflow
 
 on:
-  schedule:
-    - cron: '40 23 * * *'
-#  repository_dispatch:
-#    types: [dependabot_alert_created]
+  repository_dispatch:
+    types: [dependabot_alert_created]
 
 jobs:
   create_auto_pr:
-    if: ${{ contains(github.event.client_payload.alert.metadata.vulnerabilities[0].severity, 'critical') }}
+    if: ${{ github.event.client_payload.alert.metadata.vulnerabilities[0].severity == 'low' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
