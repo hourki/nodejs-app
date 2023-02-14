@@ -2,19 +2,17 @@ name: Dependabot Auto-PR Workflow
 
 on:
   schedule:
-    - cron: '23 20 * * *' # Runs everyday at 11:20pm
+    - cron: '23 30 * * *' # Runs everyday at 11:20pm
   repository_dispatch:
     types: [dependabot_alert_created]
 
 jobs:
   create_auto_pr:
+    if: ${{ contains(github.event.client_payload.alert.metadata.vulnerabilities[0].severity, 'critical') }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-        with:
-          ref: ${{ github.head_ref }}
-      - name: Create Auto-PR
+      - uses: actions/checkout@v2
+      - name: Create Auto Depandabot PR
         uses: dependabot/create-merge-request-action@v2.5.0
         with:
           dependabot-github-token: ${{ secrets.DEPENDABOT_GITHUB_TOKEN }}
